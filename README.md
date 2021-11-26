@@ -1,90 +1,19 @@
 # Eksamen PGR301
 
-## Bakgrunn
-
-Du er leid inn til SkalBank AS, som trenger desperat hjelp.
-
-Banken har brukt flere år og hundretalls milioner på å utvikle et moderne kjernesystem for bank og et "fremoverlent" API som
-nesten tilfredsstiller __Directive (EU) 2015/2366 of the European Parliament and of the Council on Payment Services in the
-Internal Market, published 25 November 2016__ også kjent som PSD.
-
-Dette er en viktig satsning innen området "Open Banking" for SkalBank.
-
-Arkitekturmessig består systemet av to komponenter.
-
-* Et API, implementert ved hjelp av Spring Boot. Applikasjonen og noe infrastrukturkode ligger i dette repoet.
-* Et kjernesystem som utfører transaksjoner med andre banker, avregner mot Norges bank osv. Dere kan late som metodekall som gjøres mot klassen ReallyShakyBankingCoreSystemService, kommuniserer med dette systemet.
-* NB! Dere skal IKKE gjøre endringer i klassen *ReallyShakyBankingCoreSystmeService*
-
-Finanstilsynet et litt imponert over den delvise etterlevelsen av direktivet, men ikke imponert over stabiliteten til SkalBanks API. Banken har en en rekke tekniske problemer
-
-* Applikasjonen er veldig ustabil.
-* Det er vanskelig å si om problemet ligger i API eller kjernesystemet. Alle driver faktaløs "Blamestorming" uten å fokusere på å finne ut av hvor problemet ligger.
-* Responstidene er veldig variabel, og Applikasjonen feiler med sporadiske "BackEndException".
-* Det er umulig å se hva som faktisk er feil. Applikasjonen lager lite logger, og gir ikke fra seg noe form for telemetri.
-
-SkalBank har også problmer med sin systemutviklingsprosess for API teamet.
-
-* Mellom fem og ti utviklere committer til _main_ branch kontinuerlig, uten nødvendigvis å kompilere koden og kjøre
-  tester. Dette skaper naturligvis det komplette kaos.
-* Det finnes et team i SkalBank som jobber med manuelle tester og drift; _"Team Dino"_. Teamet er på ca 100 ansatte og SkalBank vurderer å
-  rekruttere ytterligere for å øke kvaliteten på leveransene som har vært fallende siden lansering.
-* Hver gang en ny versjon av API skal releases, lager tech lead "Jens" en JAR han gir til "Team Dino"".
-* "Team Dino" tester applikasjonen grundig- og setter den nye versjonen i drift.
-* "Team Dino" gjør overfladisk overvåkning, og starter applikasjonen på nytt hver natt eller etter behov.  
-
-## Krav til leveransen
-
-* Eksamensoppgaven er gitt på GitHub repository ; https://github.com/PGR301-2021/eksamen_2021
-* Du skal IKKE lage en fork av dette repositoryet, men kopiere innholdet til et nytt repository. Årsaken til dette er at sensor vil lage en fork av ditt repo, og arbeidsflyten blir lettere for sensor om har har et frittstående repo.
-* Du kan velge å kode i et privat eller public repo.
-* Du kan jobbe i et privat repo, og deretter gjøre det public noen timer etter innleveringsfrist hvis du er bekymret for plagiat fra medstudenter.
-
-Når sensor evaluerer oppgaven vil han/hun se på
-
-* Ditt repository og "Actions" fanen i GutHub for å bekrefte at Workflows faktisk virker
-* AWS miljøet i klassens AWS konto for å bekrefte at oppgaver som beskrevet er utført
-* Vurdere drøftelsesoppgavene. Det anbefales å lage en egen "Readme/Markdown" for disse i ditt repo.
-* Lager en fork av ditt repo og tester ut pipelines med egen AWS bruker/github bruker.
-
-Ved innlevering via WiseFlow, kan dere lage et tekstdokument som kun inneholder link til deres repository
-
-## Evaluering 
-
-* DevOps prinsipper & Pipeline - 20 poeng  
-* Feedback & Telemetri -30 poeng
-* Terraform og IAC i Pipeline - 30 poeng
-* Docker - 20 poeng
-
-## Litt om GitHub free tier
-
-* I oppgaven blir du bedt om å lage GitHub actions workflows.
-* Med GitHub "Free tier" har du 2,000 minutter med gratis byggetid per måned, dersom du bruker et privat repo.
-* Dersom dere i en ekstrem situasjon skulle trenge mer byggetid, kan dere gjøre repository public. Da er byggetiden ubegrenset.
-* Hvis dere da er bekymret for at andre skal kopiere arbeidet deres, kan dere lage en ny GitHub bruker med et tilfeldig navn.
-
-OBS!
-
-* I "Free" planen til GitHub er "branch protection" ikke tillat når et repository er privat. Det vil si at dere ikke kan konfigurere GitHub til å hindre push mot for eksempel _main_ branch direkte, eller konfigurere regler for godkjenning før merge av pull request osv.
-* I denne oppgaven blir dere bedt om å beskrive _hvordan_ dette kan gjøres, men dere trenger altså ikke konfigurere dette for repoet dere leverer.
-
-## Beskrivelse av API
-
-APIet eksponerer tre endepunkter, dere kan ikke endre på disse
-
-*  /account/{fromAccount}/transfer/{toAccount} [POST] - Overfører penger mellom to kontoer. Oppretter kontoer for både mottaker ov avsender dersom de ikke finnes. Se modellpakken for beskrivelse av Payload
-*  /account [POST] - Oppdaterer en konto - Se modellpakken for beskrivelse av Payload
-*  /accoount/{accountId} [GET] - Returnerer kontoopplysninger
-
 ## Oppgave - DevOps
 
 Med DevOps som arbeidsmåte i tankene- Hvilke forbedringer kan teamet gjøre med fokus på måten de jobber med kildekode og versjonskontroll?
 
-### Drøft
+* Når man skal bruke DevOps som arbeidsmetode hvor CI og CD er viktige elementer er det lurt å bruke Github Actions, Travis CI, Jenkins eller andre.
+I denne oppgaven brukes det GitHub Actions hvor man via en eller flere yaml/yml-filer i repositoryet under mappen ".github/workflows" er med på å sette opp GitHub Actions, slik at man selv kan tilpasse hvilke tester som skal kjøres under hvilke omstendigheter. Det vil i dette tilfellet settes opp for både Docker, applikasjonen og terraform. Dersom noen av disse "feiler" sitt bygg, vil man ikke få mreget pull-requesten sin til main branch. Dette vil da kunne stoppe em fra å pushe ett brekt bygg eller en test som ikke kjører til main-branch. Den kjører her på både push direkte til main og på pull-requests, men temet bør endre praksis fra å pushe rett til main, og over til å bruke branches for utvikling, deployment og feilrettinger.
 
-* Beskriv med ord eller skjermbilder hvordan man kan konfigurere GitHub på en måte som gir bedre kontroll på utviklingsprosessen. Spesielt med tanke på å hindre kode som ikke kompilerer og feilende tester fra å bli integrert i _main_ branch.
-* Beskriv med ord eller skjermbilder hvordan GitHub kan konfigureres for å sikre at minst ett annet medlem av teamet har godkjent en pull request før den merges.
-* Beskriv hvordan arbeidsflyten for hver enkelt utvikler bør være for å få en effektiv som mulig utviklingsprosess, spesielt hvordan hver enkelt utvikler bør jobbe med Brancher i Github hver gang han eller hun starter en ny oppgave.
+* Inne på GitHub repoet, under Settings -> Branches -> Add Rule kan man legge til at både statussjekker må vere OK før man merger som kalles "branch protection", her kan man også legge inn "Require pull request reviews before merging" dersom man er flere på samme prosjekt. Det fører til at en annen må se over koden og godkjenne, før du får merget pull requesten til main branch.
+
+* Som nevnt tildigere er CI og CD (Continious Integration og Continious Deployment) grunnelggende prinsipper for DevOps.
+Det bør være satt opp slik at hver enkelt utvikler kan jobbe med sitt område og pushe oppdateringer hyppig ved bruk av dev/feature branches. Disse bør være kortlevde og man bør opprette nye, dersom man skal implementere noe nytt. Det samme gjelder feilrettinger i koden eller forbedringer. Dette bør gjøres på egne branches, for så å merges inn mot main ofte. Dersom de skal merges bør det være en annen som ser over pull-requesten før den blir merget, men også at man har automatiserte teste og ser at koden bygger hver gang før merge. Dette bør da som sagt være automatisert for å sikkre god flyt og effektivitet blant de ulike utviklerene på teamet.
+
+* I noen tilfeller kan dette virke "i overkant", men det er en god praksis dersom man ønsker å etterstrebe DevOps-prinsipper for flow og det er spesielt viktig at ikke koden i main og/ eller deployment brekker eller inneholder feil som kunne ha vært unngått ved å gjøre det ordentlig i første omgang.
+Det er også tidsbesparende over tid å få autiomatisert det som kan automatiseres, for at utviklerne kan holde seg til det de faktisk kan best og er spesialisert innen.
 
 ### Drøft
 
