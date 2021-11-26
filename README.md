@@ -42,7 +42,9 @@ Hvorfor funket terraformkoden i dette repoet for "Jens" første gang det ble kj�
 
 Sensor ønsker å lage sin bucket ved hjelp av CLI. Sensor har aws kommandolinje installert på sin lokale maskin. Hva må sensor gjøre for å konfigurere AWS nøkler/Credentials? Anta at Sensor sin AWS bruker ikke har nøkler/credentials fra før.
 
-For å gjøre en aws configure må man ha en AWS Access Key ID og en AWS Secret Access Key. Disse kan man opprette i sin IAM-bruker på AWS. Inne på IAM (Identity and Access Management) Trykker man på "My Secyrity Credentials" hvor man så får muligheten til å trykke på "Create access key". Dette gjør man og da må man ta vare på disse nøklene, men det er viktig at dette er hemmeligheter som ikke skal legges ut eller deles med andre. Disse får man muligheten til å laste ned som en .csv-fil.
+For å gjøre en aws configure må man ha en AWS Access Key ID og en AWS Secret Access Key. Disse kan man opprette i sin IAM-bruker på AWS. Inne på IAM (Identity and Access Management) Trykker man på "My Secyrity Credentials" hvor man så får muligheten til å trykke på "Create access key". 
+![image](https://user-images.githubusercontent.com/56038804/143626589-607bf0b3-9933-4888-98a3-d34f0fad2b31.png)
+Dette gjør man og da må man ta vare på disse nøklene, men det er viktig at dette er hemmeligheter som ikke skal legges ut eller deles med andre. Disse får man muligheten til å laste ned som en .csv-fil.
 Når man så kjører aws confiugure legger man først inn Access key, så Secret Access Key, region (eu-west-1) og default format (json).
 Etter dette er man konfigurert og autentifisert mot sin AWS-bruker og kan kjøre kommandoer fra CLI på vegne av den, slik som det å sette opp en bucket i S3 med kommandoen:
 
