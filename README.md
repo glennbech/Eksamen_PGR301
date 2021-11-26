@@ -47,7 +47,7 @@ Når man så kjører aws confiugure legger man først inn Access key, så Secret
 Etter dette er man konfigurert og autentifisert mot sin AWS-bruker og kan kjøre kommandoer fra CLI på vegne av den, slik som det å sette opp en bucket i S3 med kommandoen:
 
 ```
-aws s3api create-bucket --bucket stwe001 --region eu-west-1
+aws s3api create-bucket --bucket stwe001 --region eu-west-1 --create-bucket-configuration LocationConstraint=eu-west-1
 ```
 
 AWS brukeren du har fått utlevert har ingen nøkler. Ved hjelp av Console (UI) Lag en Access Key som du kan bruke videre i oppgaven.
