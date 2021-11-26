@@ -58,18 +58,14 @@ Gjør nødvendige endringer i Terraform kode for å bruke en Backend som lagrer 
 
 ### Terraform kode
 
-Lag Terraform kode som oppretter følgende ressurser i klassens AWS konto, i region _eu-west-1_
-
-- ECR repository. Navnet på repository skal være studentnavn eller en annen unik identifikator, for eksempel kandidatnummer for eksamen.
-
-ECR (Elastic Container Reigstry) brukes for å lagre Docker container images. Vi skal bruke dette ECR Repoet i en senere oppgave.
-
 ### Terraform i Pipeline
 
 * Beskriv hva sensor må gjøre etter han/hun har laget en fork for å få pipeline til å fungere for i sin AWS/gitHub konto.
 * Hvilke verdier må endres i koden?
-* Hvilke hemmeligheter må legges inn i repoet. Hvordan gjøres dette?
- 
+
+* Hemmeligheter som må legges til under GitHub secrets for at man skal kunne autenifiseres i forbindelse med AWS er  Access key og secret access key. Disse legges inn i GitHub secrets på følgende måte.
+![image](https://user-images.githubusercontent.com/56038804/143626395-02a9ff3a-1d79-4686-bca9-42b9c2f6638e.png)
+*  
 ## Oppgave - Docker
 
 ### Dockerfile
