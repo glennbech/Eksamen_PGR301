@@ -44,7 +44,7 @@ Sensor ønsker å lage sin bucket ved hjelp av CLI. Sensor har aws kommandolinje
 
 Fullfør
 ```
-aws s3api ...
+aws s3api create-bucket --bucket stwe001 --region eu-west-1
 ```
 
 AWS brukeren du har fått utlevert har ingen nøkler. Ved hjelp av Console (UI) Lag en Access Key som du kan bruke videre i oppgaven.
@@ -72,15 +72,21 @@ ECR (Elastic Container Reigstry) brukes for å lagre Docker container images. Vi
 ### Dockerfile
 
 Hva vil kommandolinje for å _bygge_ et container image være? Fullfør ...
-
+```
 docker build -t *tag name*
+```
 
 Hva vil kommando for å _starte_ en container være? Applikasjonen skal lytte på port 7777 på din maskin. Fullfør...
 
+```
 docker run -p 7777:80 *tag name*
+```
 
 Medlemmer av "Team Dino" har av og til behov for å kjøre to ulike versjoner av applikasjonen lokalt på maskinen sin, _samtidig_ .Hvordan kan de gjøre dette uten å få en port-konflikt?  Hvilke to kommandoer kan man kjøre for å starte samme applikasjon to ganger, hvor den ene bruker port 7777 og den andre 8888?
 
+```
 docker run -p 7777:80 *tag name*
-
+```
+```
 docker run -p 8888:80 *tag name*
+```
