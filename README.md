@@ -63,21 +63,31 @@ Gjør nødvendige endringer i Terraform kode for å bruke en Backend som lagrer 
 ### Terraform i Pipeline
 
 * Beskriv hva sensor må gjøre etter han/hun har laget en fork for å få pipeline til å fungere for i sin AWS/gitHub konto.
+
 * Hvilke verdier må endres i koden?
 
-* Hemmeligheter som må legges til under GitHub secrets for at man skal kunne autenifiseres i forbindelse med AWS er  Access key og secret access key. Disse legges inn i GitHub secrets på følgende måte.
+*I koden som ligger i infra -> provider.tf bør sensor gjøre noen endringer hvor h*n erstatter "stwe001" med f.eks sitt brukernavn.
+![image](https://user-images.githubusercontent.com/56038804/143681629-ce26550e-7b55-4c50-a7b3-c86ac42086bf.png)
+
+*Dette gjelder også for infra -> ECR.tf 
+![image](https://user-images.githubusercontent.com/56038804/143681644-66e2f4ac-558c-4e9f-bc5d-1de91e6dfdd4.png)
+
+*Sensor kan også endre i koden som kjører docker-kommandoer via workflows under .github -> workflows -> docker.yml for å navngi tags på docker-images annerledes
+![image](https://user-images.githubusercontent.com/56038804/143681768-28d3a0eb-02f3-469b-a0f0-ce2c0de22b0b.png)
+
+
+* Hemmeligheter som må legges til under GitHub secrets for at man skal kunne autenifiseres i forbindelse med AWS er  Access key og secret access key. Disse legges inn i GitHub secrets på følgende måte. Inne på repo: Settings -> Secrets -> New repository secret. Det er viktig å navngi de slik det er vist på bildet, for at det skal fungere med koden.
 ![image](https://user-images.githubusercontent.com/56038804/143626395-02a9ff3a-1d79-4686-bca9-42b9c2f6638e.png)
-*  
-## Oppgave - Docker
+
 
 ### Dockerfile
 
-Hva vil kommandolinje for å _bygge_ et container image være? Fullfør ...
+Hva vil kommandolinje for å _bygge_ et container image være?
 ```
 docker build -t *tag name*
 ```
 
-Hva vil kommando for å _starte_ en container være? Applikasjonen skal lytte på port 7777 på din maskin. Fullfør...
+Hva vil kommando for å _starte_ en container være? Applikasjonen skal lytte på port 7777 på din maskin.
 
 ```
 docker run -p 7777:80 *tag name*
