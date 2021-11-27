@@ -67,12 +67,15 @@ Gjør nødvendige endringer i Terraform kode for å bruke en Backend som lagrer 
 * Hvilke verdier må endres i koden?
 
 *I koden som ligger i infra -> provider.tf bør sensor gjøre noen endringer hvor h*n erstatter "stwe001" med f.eks sitt brukernavn.
+
 ![image](https://user-images.githubusercontent.com/56038804/143681629-ce26550e-7b55-4c50-a7b3-c86ac42086bf.png)
 
 *Dette gjelder også for infra -> ECR.tf 
+
 ![image](https://user-images.githubusercontent.com/56038804/143681644-66e2f4ac-558c-4e9f-bc5d-1de91e6dfdd4.png)
 
 *Sensor kan også endre i koden som kjører docker-kommandoer via workflows under .github -> workflows -> docker.yml for å navngi tags på docker-images annerledes
+
 ![image](https://user-images.githubusercontent.com/56038804/143681768-28d3a0eb-02f3-469b-a0f0-ce2c0de22b0b.png)
 
 
