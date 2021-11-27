@@ -85,6 +85,8 @@ Gjør nødvendige endringer i Terraform kode for å bruke en Backend som lagrer 
 
 ### Dockerfile
 
+NB. Der det står *tag name* kan man bruke en identifikator for å referere til imaget. Man kan fint bruke f.eks " *brukernavn*-image " eller lignende.
+
 Hva vil kommandolinje for å _bygge_ et container image være?
 ```
 docker build -t *tag name*
