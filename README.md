@@ -23,10 +23,16 @@ Det er også tidsbesparende over tid å få autiomatisert det som kan automatise
 
 ## Oppgave - Feedback
 
-* Hvilke spørring(er) kan sensor gjøre mot InfluxDB for å analysere problemet? For eksempel noe i retning av;
+* Hvilke spørring(er) kan sensor gjøre mot InfluxDB for å analysere problemet?
 
 ```sql
-select * from my_timer_metric_name
+
+SELECT * FROM http_server_requests WHERE exception != 'None'
+eller
+SELECT * FROM http_server_requests WHERE status != '200'
+eller
+SELECT * FROM http_server_requests WHERE outcome != 'SUCCESS'
+
 ```
 
 * Start Grafana på lokal maskin ved hjelp av Docker. Bruk InfluxDB som en datakilde og legg ved et skjermbilde av et Dashboard du har laget som viser en Metric fra InfluxDB som er produsert av Micrometer rammeverket.
@@ -66,11 +72,11 @@ AWS brukeren du har fått utlevert har ingen nøkler. Ved hjelp av Console (UI) 
 
 * Hvilke verdier må endres i koden?
 
-*I koden som ligger i infra -> provider.tf bør sensor gjøre noen endringer hvor h*n erstatter "stwe001" med f.eks sitt brukernavn.
+* I koden som ligger i infra -> provider.tf bør sensor gjøre noen endringer hvor h*n erstatter "stwe001" med f.eks sitt brukernavn.
 
 ![image](https://user-images.githubusercontent.com/56038804/143681629-ce26550e-7b55-4c50-a7b3-c86ac42086bf.png)
 
-*Dette gjelder også for infra -> ECR.tf 
+* Dette gjelder også for infra -> ECR.tf 
 
 ![image](https://user-images.githubusercontent.com/56038804/143681644-66e2f4ac-558c-4e9f-bc5d-1de91e6dfdd4.png)
 
