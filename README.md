@@ -35,9 +35,8 @@ select * from my_timer_metric_name
 
 ## Oppgave Terraform
 
-
-Hvorfor funket terraformkoden i dette repoet for "Jens" første gang det ble kjørt? Og hvorfor feiler det for alle andre etterpå, inkludert Jens etter at han ryddet på disken sin og slettet _terraform.tfstate_ filen?
-
+*Grunnen til at terraformkoden fungerte første gangen den ble kjørt er at Jens sin terraform state var lagret lokalt og dette er terraform helt avhengig av å kunne akksessere for å gjøre terraform plan og endringer i infrastrukturen. Før terraform kjører en opperasjon, vil terraform oppdatere .tfstate-filen med infrastruktur fra koden. Denne .tfstate-filen som ingen ender opp med å ha, resulterer i at terraform ikke har noen lagret status over infrastruktur og konfigurasjon. Dette gjør at Terraform ikke kan mappe ressurser for applikasjonen mot terraform-konfigurasjonen.
+Når man jobber i team er det viktig at denne filen lagres ekstert, slik at alle på teamet kan akksessere denne filen og "pushe" oppdateringer til state, når det blir gjort endringer.
 
 ### AWS CLI
 
