@@ -26,6 +26,11 @@ Det er også tidsbesparende over tid å få autiomatisert det som kan automatise
 * Hvilke spørring(er) kan sensor gjøre mot InfluxDB for å analysere problemet?
 
 ```sql
+For å se tiden for behandling av request:
+
+SELECT * FROM timed_transfer
+
+For å sortere requests:
 
 SELECT * FROM http_server_requests WHERE exception != 'None'
 eller
