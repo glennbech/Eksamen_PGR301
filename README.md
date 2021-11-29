@@ -1,7 +1,7 @@
 # Eksamen PGR301
 
-For å kjøre applikasjonen gjør man som følger:
-1. Kjører denne kommandoen i rot-mappen til prosjektet via terminal:
+## For å kjøre applikasjonen gjør man som følger:
+* 1. Kjører denne kommandoen i rot-mappen til prosjektet via terminal:
 ```
 docker run --rm -d --name influxdb \
   -p 8083:8083 -p 8086:8086 -p 25826:25826/udp \
@@ -10,15 +10,15 @@ docker run --rm -d --name influxdb \
   -v $PWD/types.db:/usr/share/collectd/types.db:ro \
   influxdb:1.0
 ```
-3. Kjører denne kommandoen i terminal fra samme mappen:
+* 2. Kjører denne kommandoen i terminal fra samme mappen:
 ```
 mvn spring-boot:run
 ```
-4. Kjører denne kommandoen i terminal:
+* 3. Kjører denne kommandoen i terminal:
 ```
 docker run -d -p 3000:3000 --name grafana grafana/grafana:6.5.0
 ```
-5. Gå til:
+* 4. Gå til:
 ```
 For InfluxDB:
 http://localhost:8083/
@@ -26,9 +26,9 @@ http://localhost:8083/
 For Grafana (Grafana må settes opp, da det ikke følger med noen config):
 http://localhost:3000/
 ```
-5. Gjør en AWS configure med secrets fra AWS.
-6. Setter opp GitHub-repo med secrets fra AWS, som forklares mer nøye senere i oppgaven. 
-8. For å teste AWS-funksjonalitet, kjør en push mot main og/eller gjør en endring og push til en ny branch som merges via pull request til main. Det ligger også en test i koden som kan breakes enkelt, dersom man ønsker å teste hvordan håndtering av feilende tester fungerer.
+* 5. Gjør en AWS configure med secrets fra AWS.
+* 6. Setter opp GitHub-repo med secrets fra AWS, som forklares mer nøye senere i oppgaven. 
+* 7. For å teste AWS-funksjonalitet, kjør en push mot main og/eller gjør en endring og push til en ny branch som merges via pull request til main. Det ligger også en test i koden som kan breakes enkelt, dersom man ønsker å teste hvordan håndtering av feilende tester fungerer.
 
 ## Oppgave - DevOps
 
