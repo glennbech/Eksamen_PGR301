@@ -42,6 +42,11 @@ SELECT * FROM http_server_requests WHERE outcome != 'SUCCESS'
 
 * Start Grafana på lokal maskin ved hjelp av Docker. Bruk InfluxDB som en datakilde og legg ved et skjermbilde av et Dashboard du har laget som viser en Metric fra InfluxDB som er produsert av Micrometer rammeverket.
 
+
+* Skjermbilde fra Grafana hvor det brukes informasjon fra micrometer for å hente ut transfer ammount fra transfers hvor man ser successfull transfers som prikker under verdien 1, og unsuccsessfull under verdien 0 og respons tid for account transfer via "@Timed"-annotasjonen som jeg har kalt timed_transfer i koden.
+
+![image](https://user-images.githubusercontent.com/56038804/143923072-161140e9-1f65-4176-a1b7-410e66c005e2.png)
+
 ## Oppgave Terraform
 
 * Grunnen til at terraformkoden fungerte første gangen den ble kjørt er at Jens sin terraform state var lagret lokalt og dette er terraform helt avhengig av å kunne akksessere for å gjøre terraform plan og endringer i infrastrukturen. Før terraform kjører en opperasjon, vil terraform oppdatere .tfstate-filen med infrastruktur fra koden. Denne .tfstate-filen som ingen ender opp med å ha, resulterer i at terraform ikke har noen lagret status over infrastruktur og konfigurasjon. Dette gjør at Terraform ikke kan mappe ressurser for applikasjonen mot terraform-konfigurasjonen.
