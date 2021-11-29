@@ -103,8 +103,6 @@ Etter dette er man konfigurert og autentifisert mot sin AWS-bruker og kan kjøre
 aws s3api create-bucket --bucket stwe001 --region eu-west-1 --create-bucket-configuration LocationConstraint=eu-west-1
 ```
 
-AWS brukeren du har fått utlevert har ingen nøkler. Ved hjelp av Console (UI) Lag en Access Key som du kan bruke videre i oppgaven.
-
 ### Endre Terraform provider til å bruke en S3 backend for state.
 
 ![image](https://user-images.githubusercontent.com/56038804/143772126-24ddc0c7-71fe-4190-b056-5ffca357f38c.png)
@@ -141,17 +139,22 @@ AWS brukeren du har fått utlevert har ingen nøkler. Ved hjelp av Console (UI) 
 NB. Der det står *tag name* kan man bruke en identifikator for å referere til imaget. Man kan fint bruke f.eks " *brukernavn*-image " eller lignende.
 
 Hva vil kommandolinje for å _bygge_ et container image være?
+
+* For å Bygge Docker image bruker man kommandoen:
 ```
 docker build -t *tag name*
 ```
 
 Hva vil kommando for å _starte_ en container være? Applikasjonen skal lytte på port 7777 på din maskin.
 
+* For å starte en container på maskinen kjører man denne kommandoen der 7777:80 er port-mapping:
 ```
 docker run -p 7777:80 *tag name*
 ```
 
 Medlemmer av "Team Dino" har av og til behov for å kjøre to ulike versjoner av applikasjonen lokalt på maskinen sin, _samtidig_ .Hvordan kan de gjøre dette uten å få en port-konflikt?  Hvilke to kommandoer kan man kjøre for å starte samme applikasjon to ganger, hvor den ene bruker port 7777 og den andre 8888?
+
+For å kjøre to instanser av samme container-image på to ulike porter vil man bruke port-mapping til å mappe de til hver sin port på maskinen, men samme port i container-image, så ikke noen funksjonalitet går tapt.
 
 ```
 docker run -p 7777:80 *tag name*
