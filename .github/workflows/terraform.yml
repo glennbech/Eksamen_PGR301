@@ -20,16 +20,6 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
 
-    - name: Terraform Format
-      working-directory: ./infra
-      id: fmt
-      run: terraform fmt -check
-
-    - name: Terraform Validate
-      working-directory: ./infra
-      id: validate
-      run: terraform validate -no-color
-
     - name: Terraform Apply
       working-directory: ./infra
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
