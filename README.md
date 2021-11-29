@@ -127,7 +127,7 @@ AWS brukeren du har fått utlevert har ingen nøkler. Ved hjelp av Console (UI) 
 
 ![image](https://user-images.githubusercontent.com/56038804/143681644-66e2f4ac-558c-4e9f-bc5d-1de91e6dfdd4.png)
 
-*Sensor kan også endre i koden som kjører docker-kommandoer via workflows under .github -> workflows -> docker.yml for å navngi tags på docker-images annerledes
+* Sensor kan også endre i koden som kjører docker-kommandoer via workflows under .github -> workflows -> docker.yml for å navngi tags på docker-images annerledes
 
 ![image](https://user-images.githubusercontent.com/56038804/143681768-28d3a0eb-02f3-469b-a0f0-ce2c0de22b0b.png)
 
