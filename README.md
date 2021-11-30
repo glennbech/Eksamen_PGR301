@@ -69,30 +69,28 @@ Det er ikke nødvendigvis feil å ha dedikerte folk til testing, men testene må
 * Hvilke spørring(er) kan sensor gjøre mot InfluxDB for å analysere problemet?
 
 ```sql
-For å se tiden for behandling av request:
 
-SELECT * FROM timed_transfer
+For å se backend exception:
+SELECT * FROM backend_exception WHERE value = 1
 
-For å sortere requests etter de spm feiler:
+For å se successful transfers:
+SELECT * FROM successful_transfer WHERE value = 1
 
-SELECT * FROM http_server_requests WHERE status != '200'
-eller
-SELECT * FROM http_server_requests WHERE outcome != 'SUCCESS'
-
-For å finne transfers med suksess:
-
-SELECT * FROM account_balance WHERE value != 0
-eller
-SELECT * FROM http_server_requests WHERE outcome = 'SUCCESS'
+For å se response time:
+SELECT mean FROM timed_transfer WHERE mean != 0
 
 ```
 
 * Start Grafana på lokal maskin ved hjelp av Docker. Bruk InfluxDB som en datakilde og legg ved et skjermbilde av et Dashboard du har laget som viser en Metric fra InfluxDB som er produsert av Micrometer rammeverket.
 
+* Skjermbilde fra Grafana viser hvordan jeg har tre paneler som henter ut ulike metrics via micrometer og InfluxDB for å hente ut data for backend exceptions, succsessful transfer og response time for requests mot transfer.
 
-* Skjermbilde fra Grafana hvor det brukes informasjon fra micrometer for å hente ut transfer ammount fra transfers hvor man ser successfull transfers som prikker under verdien 1, og unsuccsessfull under verdien 0 og respons tid for account transfer via "@Timed"-annotasjonen som jeg har kalt timed_transfer i koden.
+* respons tid for account transfer via "@Timed"-annotasjonen som jeg har kalt timed_transfer i koden.
 
-![image](https://user-images.githubusercontent.com/56038804/143923072-161140e9-1f65-4176-a1b7-410e66c005e2.png)
+* for successful transfer og for backend exception er det brukt en try-catch i transfer for å se om den gikk gjennom eller ikke.
+
+![image](https://user-images.githubusercontent.com/56038804/144093435-3c64a0e3-9586-4fae-9367-d55521cefd51.png)
+
 
 ## Oppgave Terraform
 
