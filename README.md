@@ -73,13 +73,17 @@ For å se tiden for behandling av request:
 
 SELECT * FROM timed_transfer
 
-For å sortere requests:
+For å sortere requests etter de spm feiler:
 
-SELECT * FROM http_server_requests WHERE exception != 'None'
-eller
 SELECT * FROM http_server_requests WHERE status != '200'
 eller
 SELECT * FROM http_server_requests WHERE outcome != 'SUCCESS'
+
+For å finne transfers med suksess:
+
+SELECT * FROM account_balance WHERE value != 0
+eller
+SELECT * FROM http_server_requests WHERE outcome = 'SUCCESS'
 
 ```
 
@@ -93,7 +97,8 @@ SELECT * FROM http_server_requests WHERE outcome != 'SUCCESS'
 ## Oppgave Terraform
 
 * Grunnen til at terraformkoden fungerte første gangen den ble kjørt er at Jens sin terraform state var lagret lokalt og dette er terraform helt avhengig av å kunne akksessere for å gjøre terraform plan og endringer i infrastrukturen. Før terraform kjører en opperasjon, vil terraform oppdatere .tfstate-filen med infrastruktur fra koden. Denne .tfstate-filen som ingen ender opp med å ha, resulterer i at terraform ikke har noen lagret status over infrastruktur og konfigurasjon. Dette gjør at Terraform ikke kan mappe ressurser for applikasjonen mot terraform-konfigurasjonen.
-Når man jobber i team er det viktig at denne filen lagres ekstert, slik at alle på teamet kan akksessere denne filen og "pushe" oppdateringer til state, når det blir gjort endringer.
+De andre når de andre utviklerene prøver å jobbe på prosjektet og kjører denne i etterkant uten state-filen vil den prøve å opprette en ny state-fil og sende den til AWS S3-bucketen på nytt, men får beskjed om at det finnes fra før, så det vil ikke fungere da det allerede ligger en S3 bucket under det samme navnet i AWS.
+Når man jobber i team er det viktig at denne state-filen lagres ekstert, slik at alle på teamet kan akksessere denne filen og "pushe" oppdateringer til state, når det blir gjort endringer.
 
 ### AWS CLI
 
