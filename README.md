@@ -1,3 +1,9 @@
+[![terraform](https://github.com/smeepz/Eksamen_PGR301/actions/workflows/terraform.yml/badge.svg?branch=main)](https://github.com/smeepz/Eksamen_PGR301/actions/workflows/terraform.yml)
+
+[![Push dockerimage to ECR](https://github.com/smeepz/Eksamen_PGR301/actions/workflows/docker.yml/badge.svg?branch=main)](https://github.com/smeepz/Eksamen_PGR301/actions/workflows/docker.yml)
+
+[![Java CI with Maven](https://github.com/smeepz/Eksamen_PGR301/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/smeepz/Eksamen_PGR301/actions/workflows/main.yml)
+
 # Eksamen PGR301
 
 ## For å kjøre applikasjonen gjør man som følger:
