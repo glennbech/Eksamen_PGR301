@@ -170,9 +170,16 @@ Medlemmer av "Team Dino" har av og til behov for å kjøre to ulike versjoner av
 
 For å kjøre to instanser av samme container-image på to ulike porter vil man bruke port-mapping til å mappe de til hver sin port på maskinen, men samme port i container-image, så ikke noen funksjonalitet går tapt.
 
+Jeg har her tatt utgangspunkt i at det skal kjøre på port 80. Det kan være det skal kjøre på 8080 i en applikasjon, og da skriver man heller eks. 7777:8080
+
 ```
 docker run -p 7777:80 *tag name*
 ```
 ```
 docker run -p 8888:80 *tag name*
 ```
+
+Etter at man har kjørt disse to kommandoene, skal det se slik ut i Docker Desktop
+
+![image](https://user-images.githubusercontent.com/56038804/144136444-bf47c547-22ac-452d-9df5-e9db967a6590.png)
+
