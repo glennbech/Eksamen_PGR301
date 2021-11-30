@@ -90,9 +90,11 @@ SELECT mean FROM timed_transfer WHERE mean != 0
 
 * Skjermbilde fra Grafana viser hvordan jeg har tre paneler som henter ut ulike metrics via micrometer og InfluxDB for å hente ut data for backend exceptions, succsessful transfer og response time for requests mot transfer.
 
-* respons tid for account transfer via "@Timed"-annotasjonen som jeg har kalt timed_transfer i koden.
 
-* for successful transfer og for backend exception er det brukt en try-catch i transfer for å se om den gikk gjennom eller ikke.
+* Response time for account transfer via "@Timed"-annotasjonen som jeg har kalt timed_transfer i koden.
+![image](https://user-images.githubusercontent.com/56038804/144139565-ce6fdb35-a53d-4252-816b-57137ebbf45d.png)
+
+* Successful transfer og for backend exception er det brukt en try-catch i transfer for å se om den gikk gjennom eller ikke.
 
 ![image](https://user-images.githubusercontent.com/56038804/144093435-3c64a0e3-9586-4fae-9367-d55521cefd51.png)
 
@@ -142,7 +144,7 @@ aws s3api create-bucket --bucket stwe001 --region eu-west-1 --create-bucket-conf
 
 * Sensor kan også endre i koden som kjører docker-kommandoer via workflows under .github -> workflows -> docker.yml for å navngi tags på docker-images annerledes
 
-![image](https://user-images.githubusercontent.com/56038804/143681768-28d3a0eb-02f3-469b-a0f0-ce2c0de22b0b.png)
+![image](https://user-images.githubusercontent.com/56038804/144139389-faae0bad-e64d-4a94-a231-d473f69b8360.png)
 
 
 * Hemmeligheter som må legges til under GitHub secrets for at man skal kunne autenifiseres i forbindelse med AWS er  Access key og secret access key. Disse legges inn i GitHub secrets på følgende måte. Inne på repo: Settings -> Secrets -> New repository secret. Det er viktig å navngi de slik det er vist på bildet, for at det skal fungere med koden.
