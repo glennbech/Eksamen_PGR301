@@ -6,6 +6,8 @@ import com.pgr301.exam.model.Transaction;
 import io.micrometer.core.annotation.Timed;
 import io.micrometer.core.instrument.MeterRegistry;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
@@ -17,6 +19,8 @@ import static java.util.Optional.ofNullable;
 
 @RestController
 public class BankAccountController implements ApplicationListener<ApplicationReadyEvent> {
+
+    private Logger logger = LoggerFactory.getLogger(BankAccountController.class);
 
     @Autowired
     private BankingCoreSystmeService bankService;
@@ -36,7 +40,9 @@ public class BankAccountController implements ApplicationListener<ApplicationRea
         try{
             bankService.transfer(tx, fromAccount, toAccount);
             meterRegistry.counter("successful_transfer").increment();
+            logger.info("Money transfer from " + fromAccount + " to " + toAccount);
         } catch (Exception e) {
+            logger.info("BACKEND EXCEPTION while trying to transfer from " + fromAccount + " to " + toAccount);
             meterRegistry.counter("backend_exception").increment();
         }
     }
@@ -44,6 +50,7 @@ public class BankAccountController implements ApplicationListener<ApplicationRea
     @Timed("timed_account")
     @PostMapping(path = "/account", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Account> updateAccount(@RequestBody Account a) {
+        logger.info("Account update/create " + a.getId());
         meterRegistry.counter("update_account").increment();
         bankService.updateAccount(a);
         return new ResponseEntity<>(a, HttpStatus.OK);
@@ -51,6 +58,7 @@ public class BankAccountController implements ApplicationListener<ApplicationRea
     @Timed("timed_balance")
     @GetMapping(path = "/account/{accountId}", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Account> balance(@PathVariable String accountId) {
+        logger.info("Account balance request " + accountId);
         meterRegistry.counter("balance").increment();
         Account account = ofNullable(bankService.getAccount(accountId)).orElseThrow(AccountNotFoundException::new);
         meterRegistry.gauge("account_balance", account.getBalance());
