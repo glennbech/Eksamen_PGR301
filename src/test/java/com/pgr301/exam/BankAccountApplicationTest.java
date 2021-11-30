@@ -29,6 +29,7 @@ class BankAccountApplicationTest {
         testAccount.setBalance(balance);
 
         assertEquals(balance, testAccount.getBalance());
+
     }
 
 }
