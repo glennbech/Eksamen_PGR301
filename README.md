@@ -43,7 +43,7 @@ Med DevOps som arbeidsmåte i tankene- Hvilke forbedringer kan teamet gjøre med
 * Når man skal bruke DevOps som arbeidsmetode hvor CI og CD (Continious Integration og Continious Deployment/Delivery) er viktige elementer er det lurt å bruke Github Actions, Travis CI, Jenkins eller andre.
 I denne oppgaven brukes det GitHub Actions hvor man via en eller flere yaml/yml-filer i repositoryet under mappen ".github/workflows" er med på å sette opp GitHub Actions, slik at man selv kan tilpasse hvilke tester som skal kjøres under hvilke omstendigheter. Det vil i dette tilfellet settes opp for både Docker, applikasjonen og terraform. Dersom noen av disse "feiler" sitt bygg, vil man ikke få mreget pull-requesten sin til main branch. Dette vil da kunne stoppe em fra å pushe ett brekt bygg eller en test som ikke kjører til main-branch. Den kjører her på både push direkte til main og på pull-requests, men temet bør endre praksis fra å pushe rett til main, og over til å bruke branches for utvikling, deployment og feilrettinger og deretter blir det gjort klar for Release.
 
-* Inne på GitHub repoet, under Settings -> Branches -> Add Rule kan man legge til at både statussjekker må vere OK før man merger som kalles "branch protection", her kan man også legge inn "Require pull request reviews before merging" dersom man er flere utviklere som jobber på samme prosjekt. Ved å aktivere "require approvals" for pull requests må et annet medlem/ en annen som jobber på samme repo eller har tilgang til repoet se over koden og godkjenne pull requesten, før du får merget pull requesten til main branch.
+* Inne på GitHub repoet, under Settings -> Branches -> Add Rule kan man legge til at både statussjekker må vere OK før man merger som kalles "branch protection", her kan man også legge inn "Require pull request reviews before merging" dersom man er flere utviklere som jobber på samme prosjekt. Ved å aktivere "require approvals" for pull requests må et annet medlem/ en annen som jobber på samme repo eller har tilgang til repoet se over koden og godkjenne pull requesten, før du får merget pull requesten til main branch. Det kom ikke med på bildet, men man må også legge inn ønsket navn på "Rule" når man skal opprette en. 
 ![image](https://user-images.githubusercontent.com/56038804/143770751-5d586819-3eb9-453e-bf7f-151a523383bf.png)
 
 * Som nevnt tildigere er CI og CD grunnelggende prinsipper for DevOps.
@@ -69,9 +69,7 @@ Det er ikke nødvendigvis feil å ha dedikerte folk til testing, men testene må
 
 * Det kan virke som om banken er i en prosess hvor de går fra en mer monolitisk tilnærming til utvikling og over til mikrotjenester i fremtiden og det blir sett på som en fremtidsrettet og mer kontrollert måte å drive på. Veien dit kan være lang, men kontrollen man får over applikasjonen og hvor fremtidsrettet dette er vil kunne være gunstig dersom banken satser på å ha et relativt stort antall brukere. Det skal nevnes at det fort kan være behov for enda fler ansatte i fremtiden for banken, men det er utenfor "scopet" til denne oppgaven.
 
-* Jeg har tolket oppgaven slik at branch protection skal være på og for at det da skal gi mening for meg, må det kjøres mot pust mot main og på pull requests. Hvis ikke vil fort poenget med branch protection bortfalle.
-Dersom builden brekker uten branch protection vil det kjøres til ECR uansett og det er vel heller ikke heldig, så deerfor har jeg valgt å løse det på denne måten.
-
+* Det står at sensor ønsker å teste direkte mot push på main. Da må selfølgelig "branch protection" skrus av/ ikke være aktivert.
 
 ### Oppgave - Feedback
 
