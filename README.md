@@ -30,7 +30,7 @@ http://localhost:3000/
 * 6. Setter opp GitHub-repo med secrets fra AWS, som forklares mer nøye senere i oppgaven. 
 * 7. For å teste AWS-funksjonalitet, kjør en push mot main og/eller gjør en endring og push til en ny branch som merges via pull request til main. Det ligger også en test i koden som kan breakes enkelt, dersom man ønsker å teste hvordan håndtering av feilende tester fungerer.
 
-## Oppgave - DevOps
+### Oppgave - DevOps
 
 Med DevOps som arbeidsmåte i tankene- Hvilke forbedringer kan teamet gjøre med fokus på måten de jobber med kildekode og versjonskontroll?
 
@@ -63,8 +63,11 @@ Det er ikke nødvendigvis feil å ha dedikerte folk til testing, men testene må
 
 * Det kan virke som om banken er i en prosess hvor de går fra en mer monolitisk tilnærming til utvikling og over til mikrotjenester i fremtiden og det blir sett på som en fremtidsrettet og mer kontrollert måte å drive på. Veien dit kan være lang, men kontrollen man får over applikasjonen og hvor fremtidsrettet dette er vil kunne være gunstig dersom banken satser på å ha et relativt stort antall brukere. Det skal nevnes at det fort kan være behov for enda fler ansatte i fremtiden for banken, men det er utenfor "scopet" til denne oppgaven.
 
+* Jeg har tolket oppgaven slik at branch protection skal være på og for at det da skal gi mening for meg, må det kjøres mot pust mot main og på pull requests. Hvis ikke vil fort poenget med branch protection bortfalle.
+Dersom builden brekker uten branch protection vil det kjøres til ECR uansett og det er vel heller ikke heldig, så deerfor har jeg valgt å løse det på denne måten.
 
-## Oppgave - Feedback
+
+### Oppgave - Feedback
 
 * Hvilke spørring(er) kan sensor gjøre mot InfluxDB for å analysere problemet?
 
@@ -81,8 +84,6 @@ SELECT mean FROM timed_transfer WHERE mean != 0
 
 ```
 
-* Start Grafana på lokal maskin ved hjelp av Docker. Bruk InfluxDB som en datakilde og legg ved et skjermbilde av et Dashboard du har laget som viser en Metric fra InfluxDB som er produsert av Micrometer rammeverket.
-
 * Skjermbilde fra Grafana viser hvordan jeg har tre paneler som henter ut ulike metrics via micrometer og InfluxDB for å hente ut data for backend exceptions, succsessful transfer og response time for requests mot transfer.
 
 * respons tid for account transfer via "@Timed"-annotasjonen som jeg har kalt timed_transfer i koden.
@@ -92,11 +93,12 @@ SELECT mean FROM timed_transfer WHERE mean != 0
 ![image](https://user-images.githubusercontent.com/56038804/144093435-3c64a0e3-9586-4fae-9367-d55521cefd51.png)
 
 
-## Oppgave Terraform
+### Oppgave Terraform
 
 * Grunnen til at terraformkoden fungerte første gangen den ble kjørt er at Jens sin terraform state var lagret lokalt og dette er terraform helt avhengig av å kunne akksessere for å gjøre terraform plan og endringer i infrastrukturen. Før terraform kjører en opperasjon, vil terraform oppdatere .tfstate-filen med infrastruktur fra koden. Denne .tfstate-filen som ingen ender opp med å ha, resulterer i at terraform ikke har noen lagret status over infrastruktur og konfigurasjon. Dette gjør at Terraform ikke kan mappe ressurser for applikasjonen mot terraform-konfigurasjonen.
-De andre når de andre utviklerene prøver å jobbe på prosjektet og kjører denne i etterkant uten state-filen vil den prøve å opprette en ny state-fil og sende den til AWS S3-bucketen på nytt, men får beskjed om at det finnes fra før, så det vil ikke fungere da det allerede ligger en S3 bucket under det samme navnet i AWS.
+* Når de andre utviklerene prøver å jobbe på prosjektet og kjører denne i etterkant uten state-filen vil den prøve å opprette en ny state-fil og sende den til AWS S3-bucketen på nytt, men får beskjed om at det finnes fra før, så det vil ikke fungere da det allerede ligger en S3 bucket under det samme navnet i AWS.
 Når man jobber i team er det viktig at denne state-filen lagres ekstert, slik at alle på teamet kan akksessere denne filen og "pushe" oppdateringer til state, når det blir gjort endringer.
+* NB! Dersom man skal opprette et nytt repo, må man ordne state der.
 
 ### AWS CLI
 
@@ -141,7 +143,6 @@ aws s3api create-bucket --bucket stwe001 --region eu-west-1 --create-bucket-conf
 
 * Hemmeligheter som må legges til under GitHub secrets for at man skal kunne autenifiseres i forbindelse med AWS er  Access key og secret access key. Disse legges inn i GitHub secrets på følgende måte. Inne på repo: Settings -> Secrets -> New repository secret. Det er viktig å navngi de slik det er vist på bildet, for at det skal fungere med koden.
 ![image](https://user-images.githubusercontent.com/56038804/143626395-02a9ff3a-1d79-4686-bca9-42b9c2f6638e.png)
-
 
 ### Dockerfile
 
