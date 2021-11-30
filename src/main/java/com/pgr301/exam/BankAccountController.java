@@ -33,7 +33,7 @@ public class BankAccountController implements ApplicationListener<ApplicationRea
         this.meterRegistry = meterRegistry;
     }
 
-    @Timed
+    @Timed("timed_transfer")
     @PostMapping(path = "/account/{fromAccount}/transfer/{toAccount}", consumes = "application/json", produces = "application/json")
     public void transfer(@RequestBody Transaction tx, @PathVariable String fromAccount, @PathVariable String toAccount) {
         meterRegistry.counter("transfer", "amount", String.valueOf(tx.getAmount()) ).increment();
