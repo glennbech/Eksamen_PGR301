@@ -14,8 +14,7 @@ class BankAccountApplicationTest {
     @Test
     void easyTestToBreak() {
 
-        assertEquals("DevOps", "DevOps");
-        //assertEquals("DevOps", "TeamDino");  //To Break the test, use this instead
+        assertEquals("DevOps", "TeamDino");  //To Break the test, use this instead
 
     }
 
